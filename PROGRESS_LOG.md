@@ -1871,3 +1871,59 @@ exes rehosted (1390-1396), 8 outdated entries synced incl. K-Lite 1.0.8, 3 rejec
 metadata drifts shown to be unserved fields, all 10 remaining missing binaries mirrored (1397-1406), the
 `id Software` row proven a false alarm, and `scripts/xmldiff.py` checked in and hardened against the
 id-collision bug that produced it.
+
+## 2026-08-31 — Add-batch: DXVK 3.1, Box64 0.4.4, FEXCore 2608, +16 GPU drivers; VIVSI→Vauzi-17 rename
+
+Bulk catalog add from a user drop at `/storage/emulated/0/Download/bh` (subfolders `box64/ dxvk/ fexcore/
+vkd3d/ "GPU drivers"/`). **26 new components, ids 1407–1432**, plus one in-place rename. Base `04c2b4a`,
+single commit **`8feef6d`** on `main` (branch `addjob-20260831`). Component-only ⇒ Pages-only, no Worker
+deploy.
+
+### Catalog adds
+
+- **DXVK 3.1 (type 3), ids 1407–1412** — full 6-variant set: `DXVK-3.1`, `-arm64ec`, `-gplasync`,
+  `-gplasync-arm64ec`, `-binsem-gplasync`, `-binsem-gplasync-arm64ec`. Source files were `DXVK-v3.1*.wcp`;
+  the `v` was dropped from catalog names to match the existing 3.0.2 set. Converted `--type dxvk`
+  (system32/ + syswow64/).
+- **Box64 0.4.4 (type 1), ids 1413–1414** — `Box64-0.4.4-Bionic`, `Box64-0.4.4-Hybrid-Bionic`.
+  `--type box64` (flat `./box64`).
+- **FEXCore 2608 (type 1), ids 1415–1416** — `FEXCore-2608` (from `-stable.wcp`), `FEXCore-2608-PPA`.
+  `--type fex` (bare `libarm64ecfex.dll` + `libwow64fex.dll`).
+- **GPU drivers (type 2), ids 1417–1432 (16):**
+  - MTR_WN: `MTR_WN_Turnip_v1.11_Axxx_{b,p}`, `MTR_WN_Turnip_v1.12_Axxx_{b,p}`
+  - MrPurple: `MrPurple_Turnip_T29-toasted`, `MrPurple_Turnip_T30-toasted` (prefix kept as `MrPurple_`
+    per user, grouping with existing T28 id 1340 — NOT the drop folder's `PURPLE_`)
+  - SMXZ: `SMXZ_Turnip_Gen8_V33/V34/V35`, `SMXZ_Turnip_v26.3.0_R4`, `SMXZ_Turnip_v26.3.0_R4_OneUI`
+  - Vauzi: `Vauzi-17_Turnip_710-720-722_v3.6` (new source prefix)
+  - WHITE: `WHITE_Turnip_Mainline_V30/V31` + `_sync` variants (named `Mainline` per user to reflect the
+    upstream mainline branch, distinct from the older `WHITE_Turnip_A8XX_*`)
+- **VKD3D (type 4):** the drop's `vkd3d/` folder was empty — nothing added; ceiling stays vkd3d-proton 3.0.1.
+
+### Rename
+
+- **id 1330** `VIVSI_Turnip_710-720-722_v2.5.6` → `Vauzi-17_Turnip_710-720-722_v2.5.6` (name + display_name
+  + blurb only; binary/id/version_code untouched). Establishes `Vauzi-17_` as the source prefix for all
+  future vauzi imports.
+
+### Process notes
+
+- **Driver `.zip` handling:** adrenotools zips aren't tar-readable by `wcp2tzst.sh` → `unzip` to a dir
+  first, then `wcp2tzst.sh --type generic <dir>`. Driver `.tzst` = flat `meta.json` + the `.so`
+  (`libvulkan_freedreno.so`; MrPurple ships `vulkan.purple.so` per its meta). `version` field taken from
+  each `meta.json` `driverVersion`.
+- **Encoding trap:** `data/custom_components.json` mixes ASCII-escaped (`→`) and literal UTF-8 (`→`)
+  blurbs (the 3.0.2 rows 1384–1389 are literal). A full `json.dump` flips one set or the other. Used a
+  **surgical text insert** (indented entry objects before the last `\n  ]`) + exact-string rename instead
+  → diff held to **341 insertions / 3 deletions** (only the rename lines changed in existing content).
+- **Build churn reverted** (verified 0 non-time changed lines each): `simulator/v2/getContainerDetail/*`,
+  `getContainerList`, `getDefaultComponent`, `getImagefsDetail`, `executeScript/{generic,qualcomm}`.
+  Kept: `data/custom_components.json`, `components/{index,dxvk_manifest,box64_manifest,drivers_manifest,downloads}`,
+  `simulator/v2/{getAllComponentList,getComponentList}`.
+
+### Live verification (worker `getAllComponentList`, signed POST)
+
+- All **26/26** new md5s present with matching id/name/type/version/file_size; **640** total live entries.
+- Rename confirmed: `Vauzi-17_Turnip_710-720-722_v2.5.6` present, old `VIVSI_…` name absent.
+- Representative release assets across all types (DXVK/Box64/FEX/driver) return HTTP 200 with
+  content-length matching the catalog `file_size`.
+- Pages `pages-build-deployment` for `8feef6d` went live within ~20 s of push.

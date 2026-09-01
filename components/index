@@ -4,21 +4,21 @@
   "data": {
     "categories": [
       {
-        "count": 40,
+        "count": 44,
         "display_name": "Box64 Emulators",
         "manifest_url": "/components/box64_manifest",
         "name": "box64",
         "type": 1
       },
       {
-        "count": 307,
+        "count": 323,
         "display_name": "GPU Drivers",
         "manifest_url": "/components/drivers_manifest",
         "name": "drivers",
         "type": 2
       },
       {
-        "count": 62,
+        "count": 68,
         "display_name": "DXVK Layers",
         "manifest_url": "/components/dxvk_manifest",
         "name": "dxvk",
@@ -60,6 +60,6 @@
         "type": 8
       }
     ],
-    "total_components": 614
+    "total_components": 640
   }
 }

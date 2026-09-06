@@ -203,25 +203,25 @@
       "version_code": 6
     },
     {
-      "display_name": "GE-Proton 11 ARM64EC (Stock Base)",
-      "download_url": "https://github.com/Elrigor/bannerhub-api/releases/download/Components/wine_geproton11-stockbase-arm64x.tar.zst",
-      "file_md5": "0c1bba9faafe10482b10d6126a235ba6",
-      "file_name": "wine_geproton11-stockbase-arm64x.tar.zst",
-      "file_size": "373592079",
+      "display_name": "GE-Proton 11.0-6 ARM64EC",
+      "download_url": "https://github.com/Elrigor/bannerhub-api/releases/download/Components/wine_geproton11.0-6-arm64x.tar.zst",
+      "file_md5": "4aec5030734dfc898a58051ad83054e0",
+      "file_name": "wine_geproton11.0-6-arm64x.tar.zst",
+      "file_size": "70878043",
       "framework": "arm64X",
       "framework_type": "proton",
       "id": 12,
       "is_steam": 1,
       "logo": "https://github.com/The412Banner/bannerhub-api/releases/download/Components/45e60d211d35955bd045aabfded4e64b.png",
-      "name": "ge-proton11.0-arm64x-v2",
+      "name": "ge-proton11.0-6-arm64x",
       "sub_data": {
-        "sub_file_name": "d2e7dd0f3bd35199e88f0650bbb85865.tzst",
-        "sub_download_url": "https://github.com/The412Banner/bannerhub-api/releases/download/Components/d2e7dd0f3bd35199e88f0650bbb85865.tzst",
-        "sub_file_md5": "d2e7dd0f3bd35199e88f0650bbb85865"
+        "sub_file_name": "426bc365226366d2705baa514aaf1413.tzst",
+        "sub_download_url": "https://github.com/Elrigor/bannerhub-api/releases/download/Components/426bc365226366d2705baa514aaf1413.tzst",
+        "sub_file_md5": "426bc365226366d2705baa514aaf1413"
       },
-      "version": "1.0.6",
-      "version_code": 7
+      "version": "11.0-6",
+      "version_code": 8
     }
   ],
-  "time": "1788718587"
+  "time": "1788722314"
 }

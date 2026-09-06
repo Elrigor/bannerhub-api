@@ -1,4 +1,4 @@
-const GITHUB_BASE = 'https://the412banner.github.io/bannerhub-api'
+const GITHUB_BASE = 'https://raw.githubusercontent.com/Elrigor/bannerhub-api/main'
 const GAMEHUB_API = 'https://landscape-api.vgabc.com'
 const SECRET_KEY = 'all-egg-shell-y7ZatUDk'
 
